@@ -129,53 +129,16 @@ int main(int argc,char* argv[])
         char buff[BUFF_SIZE];
         while(1){
             recv(client_fd,buff,BUFF_SIZE,0);
+            if(!memcmp(buff,"0",1))
+                break;
             printf("%s\n",buff);
             send(client_fd,buff,BUFF_SIZE,0);
             //printf("seulki\n");
 
         }
     }
-
-
-    /*
-    struct sockaddr_in client_addr;
-    unsigned int client_addr_size = sizeof(client_addr);
-    int client_fd,client_fd1;
-
-
-    client_fd=accept(server_fd, (struct sockaddr*)&client_addr,&client_addr_size);
-    node *newNode=(node*)malloc(sizeof(node));
-    newNode->c_fd=client_fd;
-    newNode->next=NULL;
-    L.tail = L.head = newNode;
-    printf("hi\n");
-    client_fd1=accept(server_fd, (struct sockaddr*)&client_addr,&client_addr_size);
-    node* newNode1 = (node*)malloc(sizeof(node));
-    (*newNode1).c_fd=client_fd1;
-    (*newNode1).next=NULL;
-    L.tail->next=newNode1;
-    L.tail = newNode1;
-    printf("hello\n");
-    if( -1 == client_fd){
-        printf("accept() Error !\n");
-        exit(-1);
-    }
-*/
-
-
-
-    /*
-    node *newNode = (node *)malloc(sizeof(node));
-    //newNode->c_fd = client_fd;
-    newNode->null = 0;
-    newNode->next = NULL;
-    if( L.head == NULL && L.head == NULL ){
-        L.head = L.tail = newNode;
-    }
-    else{
-        L.tail->next = newNode;
-        L.tail = newNode;
-    }*/
+    close(server_fd);
+    return 0;
 
 }
 
